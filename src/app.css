@@ -1045,12 +1045,4 @@ body {
 	@apply text-slate-300;
 }
 
-/* ── Callout Type Colors ── */
-.callout-note { --callout-color: var(--color-accent); }
-.callout-tip, .callout-success { --callout-color: var(--color-accent-green); }
-.callout-info, .callout-abstract, .callout-todo { --callout-color: var(--color-accent-cyan); }
-.callout-warning, .callout-caution, .callout-important { --callout-color: var(--color-accent-yellow); }
-.callout-danger, .callout-bug { --callout-color: var(--color-accent-coral); }
-.callout-example { --callout-color: var(--color-accent-purple); }
-.callout-quote { --callout-color: var(--color-slate-400); }
-.callout-question { --callout-color: var(--color-accent-green); }
+/* Callout colors are set inline via --callout-color from data/callouts.json */
