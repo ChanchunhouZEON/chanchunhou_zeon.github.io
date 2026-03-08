@@ -66,21 +66,23 @@
 			tick();
 		}
 
-		// Start bio typing after name reveal
-		heroBioStarted = true;
+		// Show cursor right after name brush animation completes (~2.9s), then start typing
 		bioTimeout = setTimeout(() => {
-			let j = 0;
-			function typeBio() {
-				if (j < bioText.length) {
-					heroBio = bioText.slice(0, ++j);
-					bioTimeout = setTimeout(typeBio, 14);
-				} else {
-					heroBioDone = true;
-					startRoleCycling();
+			heroBioStarted = true;
+			bioTimeout = setTimeout(() => {
+				let j = 0;
+				function typeBio() {
+					if (j < bioText.length) {
+						heroBio = bioText.slice(0, ++j);
+						bioTimeout = setTimeout(typeBio, 14);
+					} else {
+						heroBioDone = true;
+						startRoleCycling();
+					}
 				}
-			}
-			typeBio();
-		}, 2800);
+				typeBio();
+			}, 400);
+		}, 2900);
 
 		const statsEl = document.getElementById('stats-grid');
 		if (statsEl) {
