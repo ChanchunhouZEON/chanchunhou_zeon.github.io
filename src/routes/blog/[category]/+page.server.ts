@@ -17,7 +17,7 @@ export async function load({ params }: { params: { category: string } }) {
 	const category = blogCategories.find((c) => c.slug === params.category);
 	if (!category) throw error(404, 'Category not found');
 
-	const files = import.meta.glob('/src/content/blog/*.md', { query: '?raw', import: 'default' });
+	const files = import.meta.glob('/data/blog/*.md', { query: '?raw', import: 'default' });
 	const posts: BlogPostMeta[] = [];
 
 	for (const [path, resolver] of Object.entries(files)) {

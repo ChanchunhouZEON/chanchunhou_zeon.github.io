@@ -7,8 +7,8 @@ export async function load({ params }: { params: { category: string; slug: strin
 	const category = blogCategories.find((c) => c.slug === params.category);
 	if (!category) throw error(404, 'Category not found');
 
-	const files = import.meta.glob('/src/content/blog/*.md', { query: '?raw', import: 'default' });
-	const filePath = `/src/content/blog/${params.slug}.md`;
+	const files = import.meta.glob('/data/blog/*.md', { query: '?raw', import: 'default' });
+	const filePath = `/data/blog/${params.slug}.md`;
 	const resolver = files[filePath];
 
 	if (!resolver) throw error(404, 'Post not found');
@@ -35,7 +35,7 @@ export async function load({ params }: { params: { category: string; slug: strin
 }
 
 export function entries() {
-	const files = import.meta.glob('/src/content/blog/*.md', {
+	const files = import.meta.glob('/data/blog/*.md', {
 		query: '?raw',
 		import: 'default',
 		eager: true

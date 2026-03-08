@@ -2,7 +2,7 @@ import matter from 'gray-matter';
 import { calculateReadingTime } from '$lib/markdown';
 
 export async function load() {
-	const files = import.meta.glob('/src/content/blog/*.md', { query: '?raw', import: 'default' });
+	const files = import.meta.glob('/data/blog/*.md', { query: '?raw', import: 'default' });
 
 	const posts = [];
 

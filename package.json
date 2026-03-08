@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "admin:dev": "cd admin && npm run dev",
+    "admin:build": "cd admin && npm run build",
+    "admin:start": "cd admin && node build"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.8",

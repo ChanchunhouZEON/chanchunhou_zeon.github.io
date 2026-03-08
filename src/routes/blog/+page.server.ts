@@ -2,7 +2,7 @@ import matter from 'gray-matter';
 import { blogCategories } from '$lib/data/blogCategories';
 
 export async function load() {
-	const files = import.meta.glob('/src/content/blog/*.md', { query: '?raw', import: 'default' });
+	const files = import.meta.glob('/data/blog/*.md', { query: '?raw', import: 'default' });
 
 	const countByCategory: Record<string, number> = {};
 	const tagsByCategory: Record<string, Set<string>> = {};
