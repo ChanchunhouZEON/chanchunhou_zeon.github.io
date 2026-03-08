@@ -1,0 +1,23 @@
+export interface BlogCategory {
+	slug: string;
+	name: string;
+	description: string;
+	icon: string;
+}
+
+export const blogCategories: BlogCategory[] = [
+	{
+		slug: 'frontend',
+		name: 'Frontend & Web',
+		description:
+			'Deep dives into frontend frameworks, CSS innovations, and modern web development practices.',
+		icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 8-3 4 3 4"/><path d="m15 8 3 4-3 4"/></svg>'
+	},
+	{
+		slug: 'dev-tools',
+		name: 'Developer Tools',
+		description:
+			'Building and using CLI tools, development workflows, and productivity enhancers.',
+		icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>'
+	}
+];
