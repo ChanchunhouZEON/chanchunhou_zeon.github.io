@@ -6,6 +6,7 @@ import rehypeRaw from 'rehype-raw';
 import rehypeStringify from 'rehype-stringify';
 import { visit } from 'unist-util-visit';
 import type { Node, Parent } from 'unist';
+import { base } from '$app/paths';
 import calloutsData from '../../data/callouts.json';
 
 interface CalloutDef {
@@ -128,8 +129,8 @@ function preprocessObsidianImages(content: string): string {
 		const rawPath = parts[0].trim();
 		const meta = parts[1]?.trim() ?? '';
 
-		// Preserve the full relative path as-is (symlinked under static/blog_assets/)
-		const src = `/blog_assets/${rawPath}`;
+		// Preserve the full relative path, prepend base for GitHub Pages project sites
+		const src = `${base}/blog_assets/${rawPath}`;
 
 		let alt = rawPath.split('/').pop() ?? rawPath;
 		let attrs = '';
