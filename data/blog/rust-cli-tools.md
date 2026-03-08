@@ -1,9 +1,15 @@
 ---
-title: "Why I Write CLI Tools in Rust"
-date: "2026-02-20"
-excerpt: "Exploring the benefits of Rust for building fast, reliable command-line tools -- from zero-cost abstractions to fearless concurrency."
-tags: ["Rust", "CLI", "Developer Tools"]
-category: "dev-tools"
+title: Why I Write CLI Tools in Rust
+date: '2026-02-20'
+excerpt: >-
+  Exploring the benefits of Rust for building fast, reliable command-line tools
+  -- from zero-cost abstractions to fearless concurrency.
+tags:
+  - Rust
+  - CLI
+  - Developer Tools
+category: dev-tools
+order: 4
 ---
 
 ## The Case for Rust

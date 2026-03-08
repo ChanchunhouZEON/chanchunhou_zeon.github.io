@@ -14,6 +14,14 @@ const config = {
 		}),
 		paths: {
 			base: process.env.BASE_PATH || ''
+		},
+		prerender: {
+			handleHttpError: ({ path, referrer }) => {
+				// Allow missing blog-assets and broken wikilinks from blog posts
+				if (path.startsWith('/blog_assets/')) return 'warn';
+				if (referrer?.startsWith('/blog/')) return 'warn';
+				throw new Error(`404: ${path}`);
+			}
 		}
 	}
 };

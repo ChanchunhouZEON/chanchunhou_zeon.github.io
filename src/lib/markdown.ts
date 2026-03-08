@@ -114,8 +114,43 @@ const processor = unified()
 	.use(rehypeRaw)
 	.use(rehypeStringify);
 
+/**
+ * Preprocess Obsidian wikilink image embeds:
+ *   ![[image.png]]            → <img src="/blog_assets/image.png" alt="image.png">
+ *   ![[path/to/img.png]]      → <img src="/blog_assets/img.png" alt="img.png"> (uses filename only)
+ *   ![[image.png|alt text]]   → <img src="/blog_assets/image.png" alt="alt text">
+ *   ![[image.png|300]]        → <img ... width="300">
+ *   ![[image.png|300x200]]    → <img ... width="300" height="200">
+ */
+function preprocessObsidianImages(content: string): string {
+	return content.replace(/!\[\[([^\]]+)\]\]/g, (_, inner: string) => {
+		const parts = inner.split('|');
+		const rawPath = parts[0].trim();
+		const meta = parts[1]?.trim() ?? '';
+
+		// Preserve the full relative path as-is (symlinked under static/blog_assets/)
+		const src = `/blog_assets/${rawPath}`;
+
+		let alt = rawPath.split('/').pop() ?? rawPath;
+		let attrs = '';
+
+		if (meta) {
+			const sizeMatch = meta.match(/^(\d+)(?:x(\d+))?$/);
+			if (sizeMatch) {
+				attrs += ` width="${sizeMatch[1]}"`;
+				if (sizeMatch[2]) attrs += ` height="${sizeMatch[2]}"`;
+			} else {
+				alt = meta;
+			}
+		}
+
+		return `<img src="${src}" alt="${alt}" loading="lazy"${attrs}>`;
+	});
+}
+
 export async function renderMarkdown(content: string): Promise<string> {
-	const result = await processor.process(content);
+	const preprocessed = preprocessObsidianImages(content);
+	const result = await processor.process(preprocessed);
 	return String(result);
 }
 

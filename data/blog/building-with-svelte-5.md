@@ -1,9 +1,15 @@
 ---
-title: "Building a Modern Portfolio with Svelte 5"
-date: "2026-03-06"
-excerpt: "A deep dive into building a high-performance personal site using Svelte 5 runes, TailwindCSS v4, and static deployment strategies."
-tags: ["Svelte", "TailwindCSS", "Web Dev"]
-category: "frontend"
+title: Building a Modern Portfolio with Svelte 5
+date: '2026-03-06'
+excerpt: >-
+  A deep dive into building a high-performance personal site using Svelte 5
+  runes, TailwindCSS v4, and static deployment strategies.
+tags:
+  - Svelte
+  - TailwindCSS
+  - Web Dev
+category: frontend
+order: 3
 ---
 
 ## Why Svelte 5?

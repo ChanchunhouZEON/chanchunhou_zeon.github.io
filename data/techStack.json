@@ -7,24 +7,12 @@
 				"color": "#ff3e00"
 			},
 			{
-				"name": "React",
-				"color": "#61dafb"
-			},
-			{
-				"name": "Vue.js",
-				"color": "#42b883"
-			},
-			{
 				"name": "TypeScript",
 				"color": "#3178c6"
 			},
 			{
 				"name": "TailwindCSS",
 				"color": "#06b6d4"
-			},
-			{
-				"name": "Next.js",
-				"color": "#808080"
 			}
 		]
 	},
@@ -73,16 +61,8 @@
 				"color": "#326ce5"
 			},
 			{
-				"name": "AWS",
-				"color": "#ff9900"
-			},
-			{
 				"name": "GitHub Actions",
 				"color": "#2088ff"
-			},
-			{
-				"name": "Terraform",
-				"color": "#844fba"
 			},
 			{
 				"name": "Linux",
@@ -98,16 +78,8 @@
 				"color": "#f05032"
 			},
 			{
-				"name": "Figma",
-				"color": "#a259ff"
-			},
-			{
 				"name": "Neovim",
 				"color": "#57a143"
-			},
-			{
-				"name": "GraphQL",
-				"color": "#e10098"
 			},
 			{
 				"name": "WebSocket",

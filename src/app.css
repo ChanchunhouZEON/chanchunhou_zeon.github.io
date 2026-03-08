@@ -32,6 +32,36 @@
 	font-display: swap;
 }
 
+/* ── Nerd Font: SauceCodePro (for blog) ── */
+@font-face {
+	font-family: 'SauceCodePro NF';
+	src: url('/fonts/SauceCodeProNerdFont-Regular.ttf') format('truetype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'SauceCodePro NF';
+	src: url('/fonts/SauceCodeProNerdFont-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'SauceCodePro NF';
+	src: url('/fonts/SauceCodeProNerdFont-Bold.ttf') format('truetype');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'SauceCodePro NF';
+	src: url('/fonts/SauceCodeProNerdFont-Italic.ttf') format('truetype');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
 /* ── Material Oceanic Palette ── */
 @theme {
 	--font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -792,11 +822,12 @@ body {
 
 /* ── Blog Article: Obsidian Minimal Theme ── */
 .blog-article {
-	font-family: var(--font-sans);
+	font-family: 'SauceCodePro NF', 'Source Code Pro', var(--font-mono);
 }
 .blog-prose {
-	font-size: 1.05rem;
-	line-height: 1.8;
+	font-family: 'SauceCodePro NF', 'Source Code Pro', var(--font-mono);
+	font-size: 14pt;
+	line-height: 1.85;
 	color: var(--color-slate-600);
 }
 :is(.dark) .blog-prose {
@@ -886,9 +917,9 @@ body {
 	color: var(--color-slate-500);
 }
 
-/* Inline code — Nerd Font, Obsidian Minimal style */
+/* Inline code — SauceCodePro Nerd Font */
 .blog-prose code {
-	font-family: var(--font-mono);
+	font-family: 'SauceCodePro NF', 'Source Code Pro', var(--font-mono);
 	font-size: 0.88em;
 	font-weight: 500;
 	padding: 0.15em 0.4em;
@@ -910,9 +941,9 @@ body {
 	font-weight: 400;
 }
 
-/* Code blocks — Nerd Font, Obsidian-style */
+/* Code blocks — SauceCodePro Nerd Font */
 .blog-prose pre {
-	font-family: var(--font-mono);
+	font-family: 'SauceCodePro NF', 'Source Code Pro', var(--font-mono);
 	font-size: 0.9rem;
 	line-height: 1.7;
 	padding: 1.25rem 1.5rem;
@@ -953,8 +984,10 @@ body {
 	background: var(--color-slate-700);
 }
 
-/* Images */
+/* Images — full content width */
 .blog-prose img {
+	width: 100%;
+	height: auto;
 	border-radius: 0.75rem;
 	margin: 1.5rem 0;
 }
@@ -1007,7 +1040,7 @@ body {
 	gap: 0.5rem;
 	padding: 0.75rem 1rem;
 	font-weight: 600;
-	font-size: 0.9rem;
+	font-size: inherit;
 	color: var(--callout-color);
 	background: color-mix(in srgb, var(--callout-color) 8%, transparent);
 }
@@ -1025,7 +1058,7 @@ body {
 .callout-content p {
 	@apply text-slate-600;
 	margin: 0;
-	font-size: 0.95rem;
+	font-size: inherit;
 	line-height: 1.6;
 }
 :is(.dark) .callout-content p {
@@ -1038,7 +1071,7 @@ body {
 	padding: 0.5rem 1rem 0.75rem;
 	@apply text-slate-600;
 	margin: 0;
-	font-size: 0.95rem;
+	font-size: inherit;
 	line-height: 1.6;
 }
 :is(.dark) .callout > p {

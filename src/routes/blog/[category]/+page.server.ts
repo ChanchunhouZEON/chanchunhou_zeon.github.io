@@ -11,6 +11,7 @@ interface BlogPostMeta {
 	tags: string[];
 	readingTime: string;
 	category: string;
+	order?: number;
 }
 
 export async function load({ params }: { params: { category: string } }) {
@@ -34,11 +35,17 @@ export async function load({ params }: { params: { category: string } }) {
 			excerpt: data.excerpt,
 			tags: data.tags ?? [],
 			readingTime: calculateReadingTime(content),
-			category: data.category
+			category: data.category,
+			order: data.order as number | undefined
 		});
 	}
 
-	posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+	posts.sort((a, b) => {
+		if (a.order != null && b.order != null) return a.order - b.order;
+		if (a.order != null) return -1;
+		if (b.order != null) return 1;
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	});
 
 	return { posts, category };
 }

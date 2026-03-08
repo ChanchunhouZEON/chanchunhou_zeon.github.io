@@ -1,9 +1,15 @@
 ---
-title: "Modern CSS in 2026: What Changed Everything"
-date: "2026-02-10"
-excerpt: "Container queries, cascade layers, view transitions, and the CSS features that transformed how we build for the web."
-tags: ["CSS", "Frontend", "Web Standards"]
-category: "frontend"
+title: 'Modern CSS in 2026: What Changed Everything'
+date: '2026-02-10'
+excerpt: >-
+  Container queries, cascade layers, view transitions, and the CSS features that
+  transformed how we build for the web.
+tags:
+  - CSS
+  - Frontend
+  - Web Standards
+category: frontend
+order: 5
 ---
 
 ## The CSS Renaissance
