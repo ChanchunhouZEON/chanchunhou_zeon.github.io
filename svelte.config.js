@@ -18,8 +18,9 @@ const config = {
 		prerender: {
 			handleHttpError: ({ path, referrer }) => {
 				// Allow missing blog-assets and broken wikilinks from blog posts
-				if (path.startsWith('/blog_assets/')) return 'warn';
-				if (referrer?.startsWith('/blog/')) return 'warn';
+				// Paths may be prefixed with BASE_PATH in production
+				if (path.includes('/blog_assets/')) return 'warn';
+				if (path.includes('/blog/') || referrer?.includes('/blog/')) return 'warn';
 				throw new Error(`404: ${path}`);
 			}
 		}
