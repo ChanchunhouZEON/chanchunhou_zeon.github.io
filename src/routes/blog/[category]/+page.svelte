@@ -19,7 +19,7 @@
 		All categories
 	</a>
 
-	<PageHeader label={category.name} subtitle={category.description}>
+	<PageHeader label="Blog" subtitle={category.description}>
 		<span class="gradient-text">{category.name}</span>
 	</PageHeader>
 

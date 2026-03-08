@@ -1,17 +1,34 @@
 {
 	"name": "Chan Chun Hou",
 	"title": "Full-Stack Developer",
-	"roles": ["Full-Stack Developer", "Open Source Enthusiast", "Tech Blogger", "UI/UX Explorer"],
+	"roles": [
+		"Full-Stack Developer",
+		"Open Source Enthusiast",
+		"Tech Blogger",
+		"UI/UX Explorer"
+	],
 	"bio": "I build elegant, high-performance web applications and contribute to open source. Passionate about modern frontend architecture, developer tooling, and creating delightful user experiences.",
-	"email": "hello@example.com",
-	"location": "Hong Kong",
-	"github": "https://github.com/chanchunhou",
+	"email": "junhaochen774@gmail.com",
+	"location": "Guangzhou",
+	"github": "https://github.com/ChanchunhouZEON",
 	"linkedin": "https://linkedin.com/in/chanchunhou",
-	"twitter": "https://x.com/chanchunhou",
+	"twitter": "https://x.com/__jhchen__",
 	"stats": [
-		{ "label": "Years Experience", "value": "5+" },
-		{ "label": "Projects Built", "value": "20+" },
-		{ "label": "Open Source", "value": "10+" },
-		{ "label": "GitHub Stars", "value": "1K+" }
+		{
+			"label": "Years Experience",
+			"value": "5+"
+		},
+		{
+			"label": "Projects Built",
+			"value": "10+"
+		},
+		{
+			"label": "Open Source",
+			"value": "10+"
+		},
+		{
+			"label": "GitHub Stars",
+			"value": "10+"
+		}
 	]
 }

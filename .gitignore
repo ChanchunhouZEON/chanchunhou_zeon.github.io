@@ -7,6 +7,4 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-admin/.svelte-kit
-admin/build
-admin/node_modules
+admin/
