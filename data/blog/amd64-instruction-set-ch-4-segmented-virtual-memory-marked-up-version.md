@@ -9,7 +9,6 @@ tags:
   - instruction set
   - system programming
 category: system-programming
-order: 2
 ---
 >[!abstract] 
 > The *legacy x86* arch supports a segmentation-translation mechanism that allows *system software* to relocate and isolate instructions and data anywhere in the *virtual-memory space*.
@@ -315,7 +314,8 @@ As previously mentioned, there are 3-type of *descriptor tables* supported by th
  [[chap-04-Segmented Virtual Memory#Segment Selectors|Segment selectors]] point to the *GDT* when the *table-index(TI)* bit in the selector is cleared to 0.
  - The selector index portion of the segment selector references a specific entry in the *GDT*.
 The following figure shows the how the segment selector indexes into the *GDT*.
- ![[global-and-local-descriptor-table-access.png]]
+ ![[image/amd64/vol2/chap-04/global-and-local-descriptor-table-access.png]]
+
 >[!imprtant]
 > One special form is the [[chap-04-Segmented Virtual Memory#Segment Selectors|null selector]].
 > - A *null selector* points to the first entry in the *GDT*(the selector index is 0 and *TI* = 0)
@@ -329,10 +329,10 @@ The following figure shows the how the segment selector indexes into the *GDT*.
 
 Figure 4-7 shows the format of the GDTR in *legacy mode* and *compatibility mode*.
 
-![[gdtr-ldtr-format.legacy-mode.png]]
+![[image/amd64/vol2/chap-04/gdtr-ldtr-format.legacy-mode.png]]
 
 Figure 4-8 shows the format of the *GDTR* in *64-bit* mode.
-![[gdtr-ldtr-format.64bit-mode.png]]
+![[image/amd64/vol2/chap-04/gdtr-ldtr-format.64bit-mode.png]]
 
 The *GDTR* contains 2 fields:
 - & **Limit**. 2 bytes. 
@@ -376,7 +376,7 @@ The processor ignores the *high-order 4 bytes* of base address when running in *
 
 Figure 4-9 shows the relationship between the *LDT* and *GDT* data structures.
 
-![[gdt-ldt-relationship.png]]
+![[image/amd64/vol2/chap-04/gdt-ldt-relationship.png]]
 
 >[!exception]
 > Loading a *null selector* into the *LDTR* is useful if software does not use an *LDT*. This causes a \#GP if the erroneous reference is made to the *LDT*.
@@ -398,10 +398,10 @@ The *LDTR* is loaded in one of two ways:
 - Performing a task switch.
 
 Figure 4-10 shows the format of the *LDTR* in *legacy mode*.
-![[ldtr-layout.legacy.png]]
+![[image/amd64/vol2/chap-04/ldtr-layout.legacy.png]]
 
 Figure 4-11 shows the format of the *LDTR* in *long mode*(both *compatibility mode* and *64-bit mode*)
-![[ldtr-layout.long.png]]
+![[image/amd64/vol2/chap-04/ldtr-layout.long.png]]
 
 The *LDTR* contains 4 fields:
 - & **LDT Selector**. 2bytes. 
@@ -465,7 +465,7 @@ The *IDT* can contain only the following types of *gate descriptors*:
 > - In *legacy mode*, interrupt descriptor-table entries are 8 bytes.
 
 Figure 4-12 shows how the interrupt vector number indexes the *IDT*.
-![[indexing-idt.png]]
+![[image/amd64/vol2/chap-04/indexing-idt.png]]
 
 
 ### Interrupt Descriptor-Table Register
@@ -496,7 +496,7 @@ Figure 4-13 shows the generic format for user-segment and system-segment descrip
 
 Gray shading indicates the field / bit is reserved. *The format for a gate descriptor differs from the generic descriptor.*
 
-![[generic-descriptor-layout.legacy.png]]
+![[image/amd64/vol2/chap-04/generic-descriptor-layout.legacy.png]]
 
 Figure 4-13 shows the fields in a generic, *legacy-mode*, 8-byte(two double-word) *segment descriptor*. In this figure, the upper double-word(located at byte offset +4) is shown on top and the lower-double(located at byte offset +0) is shown on the bottom.
 
@@ -519,7 +519,7 @@ The fields are defined as follows:
 - & **S Bit and Type Field**. 
 
 <span style="color:#FFD60A">Bit 12 and bits [11:8] of the upper double-word</span>. The *S* and *Type* fields, together, specify the descriptor type and its access characteristics. Table 4-2 summarizes the descriptor types by *S-field* encoding and gives a cross reference to descriptions of the *Type-field* encodings.
-![[descriptor-types.png]]
+![[image/amd64/vol2/chap-04/descriptor-types.png]]
 
 - & **Descriptor Privilege-Level(DPL) Field**.
 
@@ -571,7 +571,7 @@ Code segments establish the processor *operating mode* and *execution privilege-
 >[!Caution]
 > Software cannot write into a segment whose selector references a code-segment descriptor.
 
-![[code-segment-descriptor-layout.legacy.png]]
+![[image/amd64/vol2/chap-04/code-segment-descriptor-layout.legacy.png]]
 
 >[!note]
 > Code-segment descriptors have the *S* bit set to 1, identifying the segments as user segments. *Type-field* bit 11 differentiates code-segment descriptors(bit 11 set to 1) from data-segment descriptors(bit 11 cleared to 0). 
@@ -599,7 +599,7 @@ The remaining *type-field* bits\[10:8\] define the access characteristics for th
 <span style="color:#FFD60A">Bit 8 of the upper double-word</span>. The accessed bit is set to 1 by the *processor* when the descriptor is copied from the *GDT* / *LDT* into the *CS* register. *This bit is only cleared by software*.
 
 Table 4-3 summarizes the code-segment type-field encodings.
-![[code-segment-descriptor-types.png]]
+![[image/amd64/vol2/chap-04/code-segment-descriptor-types.png]]
 
 
 - & **Code-Segment Default-Operand Size(D) Bit**. <span style="color:#FFD60A">Bit 22 of byte + 4</span>. 
@@ -624,7 +624,7 @@ They are referenced using the *DS*, *ES*, *FS*, *GS*, or *SS* data-segment regis
 > When loading the *SS* register, the processor requires that the selector reference a valid, writable data-segment descriptor.
 > 
 
-![[data-segment-descriptor-layout.legacy.png]]
+![[image/amd64/vol2/chap-04/data-segment-descriptor-layout.legacy.png]]
 
  - Data-segment descriptors have the *S* bit set to 1, identifying them as user segments.
  - Type-field bit 11 differentiates data-segment descriptors(bit 11 cleared to 0) from code-segment descriptors(bit 11 to 1).
@@ -654,7 +654,7 @@ Clearing the *E* bit to 0 identifies the data segment as *expand-up*. Valid segm
 The accessed bit is set to 1 by the *processor* when the descriptor is copied from the *GDT* / *LDT* into the *CS* register. *This bit is only cleared by software*.
 
 Table 4-4 summarize the data-segment type-field encodings.
-![[data-segment-descriptor-types.png]]
+![[image/amd64/vol2/chap-04/data-segment-descriptor-types.png]]
 
 
 - & **Data-Segment Default Operand Size(D/B) Bit**. <span style="color:#FFD60A">Bit 22 of the upper double-word</span>. 
@@ -678,26 +678,26 @@ Table 4-4 summarize the data-segment type-field encodings.
 > System-segment descriptors have the *S* bit cleared to 0. The type field is used to differentiate the various *LDT*, *TSS*, and *gate descriptor* from one another.
 
 [[chap-04-Segmented Virtual Memory#^9196bc|Table 4-5]] summarizes the system-segment type-field encodings.
-![[system-descriptor-types.legacy.png]]
+![[image/amd64/vol2/chap-04/system-descriptor-types.legacy.png]]
 
 Figure 4-16 shows the legacy-mode system-segment descriptor format used for referencing *LDT* and *TSS* segments(gray shading indicates the bit is reserved). This format is also used in *compatibility mode*. The system-segments are used as follows:
 - The *LDT* typically holds segment descriptors belonging to a single task.
 - The <span style="color:#FB8500">TSS</span> is a data structure for holding processor-state information. Processor state is saved in a <span style="color:#FB8500">TSS</span> when a task is suspended, and state is restored from the <span style="color:#FB8500">TSS</span> when a task is restarted. System software must create at least one <span style="color:#FB8500">TSS</span> referenced by the task register, *TR*.
-![[ldt-tss-descriptor-layout.legacy.png]]
+![[image/amd64/vol2/chap-04/ldt-tss-descriptor-layout.legacy.png]]
 
 ### Gate Descriptors
 
 *Gate descriptors* hold *pointers* to code segments and are used to control access between code segments with different privilege levels. There are four types of *gate descriptors*:
 - @ **Call Gates**: These gates are located in the *GDT* / *LDT* and are used to control access between code segments <span style="color:#FFD60A">in the same task / in different tasks</span>. 
-![[call-gate-descriptor-layout.legacy.png]]
+![[image/amd64/vol2/chap-04/call-gate-descriptor-layout.legacy.png]]
  ^af2f7a
 
 - @ **Interrupt Gates and Trap Gates**: These gates are located in the *IDT* and are used to control access to *interrupt-service routine*.
-![[interrupt-gate-and-trap-gate-descriptor-layout.legacy.png]]
+![[image/amd64/vol2/chap-04/interrupt-gate-and-trap-gate-descriptor-layout.legacy.png]]
 
 
 - @ **Task Gates**: These gates are used to control access between different tasks. They are also used to transfer control to interrupt-service routines if those routines are themselves a separate task.
-![[task-gate-descriptor-layout.legacy.png]]
+![[image/amd64/vol2/chap-04/task-gate-descriptor-layout.legacy.png]]
 
 
 There are several differences between the *gate-descriptor* format and the *system-segment descriptor* format. These differences are described as follows, from least-significant to most-significant bit positions:
@@ -747,7 +747,7 @@ Figure 4-20 shows the *long-mode* *code-segment descriptor* format. In *compatib
 
 In Figure 4-20, *gray shading* indicates the code-segment descriptor fields that are *ignored* in *64-bit mode* when the descriptor is used during a memory reference. <span style="color:#FFD60A">However, the fields are loaded whenever the segment register is loaded in 64-bit mode</span>.
 
-![[code-segment-descriptor-layout.long.png]]
+![[image/amd64/vol2/chap-04/code-segment-descriptor-layout.long.png]]
 
 - **Fields Ignored in 64-Bit Mode**. 
 >[!caution]
@@ -777,7 +777,7 @@ Data segments continue to exist in long mode.
 Figure 4-21 shows the *long-mode* *data-segment descriptor* format. In *compatibility mode*, the data-segment descriptor is interpreted and behaves just as it does in *legacy mode*.
 
 In Figure 4-20, *gray shading* indicates the data-segment descriptor fields that are *ignored* in *64-bit mode* when the descriptor is used during a memory reference. <span style="color:#FFD60A">However, the fields are loaded whenever the segment register is loaded in 64-bit mode</span>.
-![[data-segment-descriptor-layout.long.png]]
+![[image/amd64/vol2/chap-04/data-segment-descriptor-layout.long.png]]
 
 - **Field Ignored in 64-Bit Mode**. Segmentation is disabled in *64*-bit mode. The interpretation of the segment-base address depends on the segment register used:
 	- In data-segment descriptors referenced by the *DS*, *ES*, *SS* segment registers, the *base-address* field is ignored. For the purpose of virtual-address calculations, the base address is treated as if it has a value of zero.
@@ -797,8 +797,8 @@ In *long mode*, the allowable system-descriptor types encoded by the type field 
 >[!exception]
 > An attempt to use an illegal descriptor type causes a *general-protection exception(\#GP)*.
 
-![[system-segment-descriptor-types.long.png]]
-![[system-segment-descriptor-types.long.continue.png]]
+![[image/amd64/vol2/chap-04/system-segment-descriptor-types.long.png]]
+![[image/amd64/vol2/chap-04/system-segment-descriptor-types.long.continue.png]]
 
 In *long mode*, the modified system-segment descriptor types are:
 - The *32-bit* *LDT*(02h), which is redefined as the *64-bit* *LDT*.
@@ -807,7 +807,7 @@ In *long mode*, the modified system-segment descriptor types are:
 
 In *64-bit* mode, the *LDT* and <span style="color:#FB8500">TSS</span> system-segment descriptors are expanded by *64-bits*, as shown in Figure 4-22. In this figure, *gray shading* indicates the fields that are *ignored in 64-bit mode*. <span style="color:#FFD60A">Expanding the descriptors allows them to hold 64-bit base addresses, so their segments can be located anywhere in the virtual-address space. The expanded descriptor can be loaded into the corresponding descriptor-table register(LDTR / TR) only from 64-bit mode</span>.
 
-![[system-segment-descriptor-layout.long.png]] ^e19ea6
+![[image/amd64/vol2/chap-04/system-segment-descriptor-layout.long.png]] ^e19ea6
 
 >[!exception]
 > The 64-bit system-segment base address must be in *canonical form*. Otherwise, a *general-protection exception* occurs with a selector error-code, \#GP(selector), when the system segment is loaded.
@@ -839,9 +839,9 @@ In *long mode*, *gate descriptors* are expanded by *64* bits, allowing them to h
 
 The 64-bit *call-gate descriptor* is shown in Figure [[chap-04-Segmented Virtual Memory#^a6abe5|4-23]] and the 64-bit interrupt gate and trap gate are shown in Figure [[chap-04-Segmented Virtual Memory#^09fc2c|4-24]]. In these figures, *gray* shading indicates the fields that are ignored in *long mode*. <span style="color:#FFD60A">The interrupt and trap gates contain an addition field, The IST, that is not present in the call gate</span>.
 
-![[call-gate-layout-descriptor.long.png]] ^a6abe5
+![[image/amd64/vol2/chap-04/call-gate-layout-descriptor.long.png]] ^a6abe5
 
-![[trap-gate-and-interrupt-gate-layout-descriptor.long.png]] ^09fc2c
+![[image/amd64/vol2/chap-04/trap-gate-and-interrupt-gate-layout-descriptor.long.png]] ^09fc2c
 
 >[!exception]
 > The target code segment referenced by a *long-mode* gate descriptor must be a 64-bit code segment(*CS.L = 1*, *CS.D = 0*). If the target is not *64-bit* code segment, a *general-protection exception*, \#GP, occurs. The error code reported depends on the gate type:
@@ -887,7 +887,7 @@ The count field found in legacy call-gate descriptors is not supported in *long-
 
 The AMD64 arch redefines several of the descriptor-entry fields in support of *long mode*. The specific change depends on whether the processor in *64-bit* mode / *compatibility* mode. [[chap-04-Segmented Virtual Memory#^28df5f|Table 4-7]] summarized the changes in the descriptor entry field when the descriptor entry is loaded into a segment register(as opposed to when the segment register is subsequently used to access memory).
 
-![[descriptor-entry-field-changes-in-long-mode.png]]![[descriptor-entry-field-changes-in-long-mode.continue.png]] ^28df5f
+![[image/amd64/vol2/chap-04/descriptor-entry-field-changes-in-long-mode.png]]![[descriptor-entry-field-changes-in-long-mode.continue.png]] ^28df5f
 
 
 
@@ -912,7 +912,7 @@ System software typically assigns the privilege levels in the following manner:
 - **Privilege-level 3(least privilege)**: This level is used by application software. Software running at privilege-level 3 is normally prevented from directly accessing most processor and system resources. Instead, applications request access to the protected processor and system resources by calling more-privileged service routines to perform the accesses.
 
 [[chap-04-Segmented Virtual Memory#^e97da0|Figure 4-25]] shows the relationship of the four privilege levels to each other.
-![[privilege-level-relationships.png]]
+![[image/amd64/vol2/chap-04/privilege-level-relationships.png]]
 
 ### Privilege-Level Types
 
@@ -940,7 +940,7 @@ These are the three types of privilege levels the processor users to control acc
 > - If the *effective privilege level* is lower than (numerically greater-than) the *DPL*, a *general-protection exception(\#GP)* occurs and the segment register is not loaded.
 
 [[chap-04-Segmented Virtual Memory#^b73d85|Figure 4-26]] shows 2 examples of data-access privilege checks.
-![[privilege-check-examples.png]]
+![[image/amd64/vol2/chap-04/privilege-check-examples.png]]
 
 Example 1 in [[chap-04-Segmented Virtual Memory#^b73d85|Figure 4-26]] shows a failing data-access privilege check. The *effective privilege level* is 3 because *CPL = 3*. This value is greater than the *descriptor DPL*, so access to the data segment is denied.
 
@@ -963,7 +963,7 @@ Example 2 in [[chap-04-Segmented Virtual Memory#^b73d85|Figure 4-26]] shows a pa
 [[chap-04-Segmented Virtual Memory#^4c7608|Figure 4-27]] shows 2 examples of stack-access privilege checks.
 - In Example 1, the *CPL*, *stack selector RPL*, and *segment-descriptor DPL* are all equal, so access to the stack segment using the *SS* register is allowed.
 - In Example 2, the *stack-selector RPL* and *stack segment-descriptor DPL* are both equal. However, the *CPL* is not equal to the *stack segment-descriptor DPL*, and access to the stack segment through the *SS* register is denied.
-![[stack-access-privilege-check-examples.png]]
+![[image/amd64/vol2/chap-04/stack-access-privilege-check-examples.png]]
 ^4c7608
 
 
@@ -1023,7 +1023,7 @@ If access is allowed, the processor loads the *CS* and *rIP* registers with thei
 - In Example 2, access is denied because *CPL* :LiEqualNot: *DPL*.
 - In Example 3, access is denied because *RPL* > *CPL*.
 
-![[non-conforming-code-segment-access-privilege-check-examples.png]]
+![[image/amd64/vol2/chap-04/non-conforming-code-segment-access-privilege-check-examples.png]]
 
 
 - **Conforming Code Segments**: On a *direct control transfer* to a conforming code segment, <span style="color:#FFD60A">the target code-segment descriptor DPL can be lower than(at a greater privilege) the CPL</span>.
@@ -1044,7 +1044,7 @@ When access is allowed, the processor loads the *CS* and *rIP* register with the
 - In Example 1, access is allowed because the *CPL* of 3 is greater than the *DPL* of 0. <span style="color:#FFD60A">As the target code selector is loaded into the CS register, the old CPL value of 3 replaces the target-code selector RPL value, and the target program executes with CPL=3</span>.
 - In Example 2, access is denied because *CPL* < *DPL*.
 
-![[conforming-code-segment-access-privilege-check-examples.png]]
+![[image/amd64/vol2/chap-04/conforming-code-segment-access-privilege-check-examples.png]]
 
 ### Control Transfer Through Call Gates
 
@@ -1057,10 +1057,10 @@ Control transfers to more-privileged code segments are accomplished through the 
 
 [[chap-04-Segmented Virtual Memory#^aacafb|Figure 4-30]] shows a call-gate control transfer in *legacy mode*. The call gate descriptor contains segment-selector and segment offset fields(see [[chap-04-Segmented Virtual Memory#^af2f7a|Gate Descriptor]] for detailed). <span style="color:#FFD60A">These two fields perform the same function as the pointer operand in a direct control-transfer instruction. The segment-selector field points to the target code-segment descriptor, and the segment-offset field is the instruction-pointer offset into the target code-segment. The code-segment base taken from the  code-segment descriptor is added to the offset field in the call-gate descriptor to create the target virtual address(linear address)</span>.
 
-![[call-gate-transfer-mechanism.png]] ^aacafb
+![[image/amd64/vol2/chap-04/call-gate-transfer-mechanism.png]] ^aacafb
 
 [[chap-04-Segmented Virtual Memory#^a6abe5|Figure 4-31]] shows a call-gate control transfer in *long mode*.The *long-mode* *call-gate* descriptor format is expanded by 64-bits to hold a full 64-bit offset into the virtual-address space. <span style="color:#FFD60A">Only long-mode call gates can be referenced in long mode(64-bit mode and compatibility mode)</span>. *The legacy-mode 32-bit call-gate types are redefined in long mode as 64-bit types, and 16-bit call-gate types are illegal*.
-![[call-gate-transfer-mechanism.long.png]]
+![[image/amd64/vol2/chap-04/call-gate-transfer-mechanism.long.png]]
 
 >[!warning]
 > A *long-mode* call gate must reference a 64-bit code-segment descriptor. In *64-bit* mode, the code-segment descriptor base-address and limit fields are ignored. The target virtual-address is the 64-bit offset field in the expanded call-gate descriptor.
@@ -1089,7 +1089,7 @@ Control transfers to more-privileged code segments are accomplished through the 
 >[!note]
 > Although all three privilege checks failed in Example 2, failing only one check is sufficient to deny access into the target code segment.
 
-![[call-gate-transfer-privilege-checks.png]]
+![[image/amd64/vol2/chap-04/call-gate-transfer-privilege-checks.png]]
 ^935492
 
 - **Stack Switching**. The processor performs an automatic stack switch when a control transfer causes a change in privilege levels to occur. <span style="color:#FFD60A">Switching stacks isolates more-privileged software stacks from less-privileged software stacks and provides a mechanism for saving the return pointer back to the program that initiated the call</span>.
@@ -1113,10 +1113,10 @@ Control transfers to more-privileged code segments are accomplished through the 
 > 8. The target program begins executing with the instruction referenced by new *CS*:*EIP*.
 
 
-![[stack-switch-with-parameters.32-bit.legacy.png]] ^5ca1e5
+![[image/amd64/vol2/chap-04/stack-switch-with-parameters.32-bit.legacy.png]] ^5ca1e5
 
 [[chap-04-Segmented Virtual Memory#^49c966|Figure 4-34]] shows a 32-bit stack in *legacy mode* before and after the automatic switch when no parameters are passed(*count* = 0). *Most software does not use the call-gate descriptor count-field to pass parameters*. <span style="color:#FFD60A">System software typically defines linkage mechanisms that do not rely on automatic parameter copying</span>. 
-![[stack-switch-no-parameters.32-bit.legacy.png]]
+![[image/amd64/vol2/chap-04/stack-switch-no-parameters.32-bit.legacy.png]]
 ^49c966
 
 [[chap-04-Segmented Virtual Memory#^cb46d8|Figure 4-35]] shows a *long-mode* stack switch. 
@@ -1133,7 +1133,7 @@ Control transfers to more-privileged code segments are accomplished through the 
 > 5. The *CS* register is loaded from the segment-selector field in the *long-mode* *call-gate* descriptor, and the *RIP* is loaded from the offset field in the *long-mode* *call-gate* descriptor.
 
 The target program begins execution with the instruction referenced by the new *RIP*.
-![[stack-switch.long.png]] ^cb46d8
+![[image/amd64/vol2/chap-04/stack-switch.long.png]] ^cb46d8
 >[!important]
 > - All *long-mode* stack pushes resulting from a privilege-level-changing far call are *8-bytes* wide and increment the *RSP* by 8.
 > - *Long mode* ignores the call-gate count field and does not support the automatic parameter-copy feature in *legacy mode*.
@@ -1258,7 +1258,7 @@ In *64-bit* mode, data reads and writes are normally checked for segment-limit v
 
 The limit-check uses the *32-bit* segment-limit to find the maximum allowable address in the top *4GB* of the *64-bit* virtual(linear) address space.
 
-![[segment_limit_checks.long.png]]
+![[image/amd64/vol2/chap-04/segment_limit_checks.long.png]]
 
 This segment-limit check does not apply to access through the *GS* segment, or to code reads. If the *DS*, *ES*, *FS* or *SS* segment is null / expand-down, the effect of the limit check is undefined.
 
