@@ -88,6 +88,14 @@
 			{
 				"name": "Shell",
 				"color": "#A7C957"
+			},
+			{
+				"name": "Cargo",
+				"color": "#E09F3E"
+			},
+			{
+				"name": "CMake",
+				"color": "#9E2A2B"
 			}
 		]
 	}
