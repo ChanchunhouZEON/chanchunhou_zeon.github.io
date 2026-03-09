@@ -28,10 +28,6 @@
 				"color": "#3776ab"
 			},
 			{
-				"name": "Go",
-				"color": "#00add8"
-			},
-			{
 				"name": "Rust",
 				"color": "#ce422b"
 			},
@@ -88,6 +84,10 @@
 			{
 				"name": "Vite",
 				"color": "#646cff"
+			},
+			{
+				"name": "Shell",
+				"color": "#A7C957"
 			}
 		]
 	}
