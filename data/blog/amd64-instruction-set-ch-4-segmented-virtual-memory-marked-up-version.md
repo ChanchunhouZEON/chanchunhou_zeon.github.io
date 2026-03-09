@@ -316,7 +316,7 @@ As previously mentioned, there are 3-type of *descriptor tables* supported by th
 The following figure shows the how the segment selector indexes into the *GDT*.
  ![[image/amd64/vol2/chap-04/global-and-local-descriptor-table-access.png]]
 
->[!imprtant]
+>[!important]
 > One special form is the [[chap-04-Segmented Virtual Memory#Segment Selectors|null selector]].
 > - A *null selector* points to the first entry in the *GDT*(the selector index is 0 and *TI* = 0)
 > - However, null selectors do not reference memory, so the first *GDT* entry cannot be used to describe a segment.
@@ -887,7 +887,8 @@ The count field found in legacy call-gate descriptors is not supported in *long-
 
 The AMD64 arch redefines several of the descriptor-entry fields in support of *long mode*. The specific change depends on whether the processor in *64-bit* mode / *compatibility* mode. [[chap-04-Segmented Virtual Memory#^28df5f|Table 4-7]] summarized the changes in the descriptor entry field when the descriptor entry is loaded into a segment register(as opposed to when the segment register is subsequently used to access memory).
 
-![[image/amd64/vol2/chap-04/descriptor-entry-field-changes-in-long-mode.png]]![[descriptor-entry-field-changes-in-long-mode.continue.png]] ^28df5f
+![[image/amd64/vol2/chap-04/descriptor-entry-field-changes-in-long-mode.png]]
+![[image/amd64/vol2/chap-04/descriptor-entry-field-changes-in-long-mode.continue.png]]
 
 
 
@@ -1245,7 +1246,7 @@ The minimum allowable segment offset in expand-down segments depends on the valu
 - If *G = 1*(4096-byte granularity), the segment-limit value in the descriptors is first scaled by 4096(1000h), and then 4095(0FFFh) is added to the value to arrive at a scaled segment-limit value. The minimum allowable segment-offset is scaled segment-limit value plus 1, as shown in the following equation:
 	- minimum segment-offset = (limit x 1000) + 0FFFh + 1
 	
->[!expample]
+>[!example]
 > For example, if the segment-limit field is *0100h*, then the minimum allowable segment-offset is *(0100h x 1000h) + 0FFFh + 1 = 10_1000h*
 
 >[!attention]

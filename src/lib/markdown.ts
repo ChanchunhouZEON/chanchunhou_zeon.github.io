@@ -149,8 +149,38 @@ function preprocessObsidianImages(content: string): string {
 	});
 }
 
+/**
+ * Strip Obsidian block IDs (e.g. ^e19ea6) that appear at end of lines.
+ */
+function stripBlockIds(content: string): string {
+	return content.replace(/ *\^[a-zA-Z0-9]{4,8}$/gm, '');
+}
+
+/**
+ * Convert Obsidian internal wikilinks to plain text:
+ *   [[page#section|display text]] → display text
+ *   [[page#section]]              → section (cleaned up)
+ *   [[page]]                      → page
+ */
+function preprocessObsidianLinks(content: string): string {
+	return content.replace(/(?<!!)\[\[([^\]]+)\]\]/g, (_, inner: string) => {
+		const parts = inner.split('|');
+		if (parts[1]) return parts[1].trim();
+		// No display text: use section after # or the page name
+		const target = parts[0];
+		const hashIdx = target.indexOf('#');
+		if (hashIdx !== -1) {
+			return target.slice(hashIdx + 1).replace(/^\^/, '').trim();
+		}
+		return target.trim();
+	});
+}
+
 export async function renderMarkdown(content: string): Promise<string> {
-	const preprocessed = preprocessObsidianImages(content);
+	let preprocessed = content;
+	preprocessed = stripBlockIds(preprocessed);
+	preprocessed = preprocessObsidianLinks(preprocessed);
+	preprocessed = preprocessObsidianImages(preprocessed);
 	const result = await processor.process(preprocessed);
 	return String(result);
 }

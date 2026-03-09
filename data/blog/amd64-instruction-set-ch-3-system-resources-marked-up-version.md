@@ -932,7 +932,7 @@ These registers are defined if the shadow stack feature is supported as indicate
 > System software sets bits in the *XSS* register *bitmap* to enable management of corresponding state component by the *Fn0000_000D_EAX\[XSAVES\]_x1=1*.
 
 The *XSS bitmap* is defined as follows:
-![[xss-register.png]]
+![[image/amd64/vol2/chap-03/xss-register.png]]
 
 ### Speculation Control MSRs
 
@@ -943,7 +943,7 @@ The *XSS bitmap* is defined as follows:
 
 The two speculation control *MSRs*, *SPEC_CTRL(MSR 048h)* and *PRED_CMD(MSR 049h)*, enable hardware features that are designed to limit certain types of speculation. Support for these feature is indicated by *CPUIDFn8000_0008_EBX* as described in [[chap-03-System Resources#^34a005|Table 3-1]] below. The presence of a given speculation control feature also implies support for its associated *MSR*.
 
-![[speculation-control-registers.png]] ^34a005
+![[image/amd64/vol2/chap-03/speculation-control-registers.png]]
 
 #### SPEC_CTRL(MSR 048h)
 >[!exception]
@@ -953,7 +953,7 @@ The two speculation control *MSRs*, *SPEC_CTRL(MSR 048h)* and *PRED_CMD(MSR 049h
 > Unlike most *MSRs*, a *WRMSR* to *SPEC_CTRL* does not serialize memory operations. However, a write to this register is dispatch serializing and prevents execution of younger instructions until the *WRMSR* has completed.
 
 The format of *SPEC_CTRL* is shown in 
-![[spec-ctrl.png]] ^fa2c90
+![[image/amd64/vol2/chap-03/spec-ctrl.png]]
 
 The *SPEC_CTRL* bits defined in [[chap-03-System Resources#^fa2c90|Figure 3-13]] and are described below:
 
@@ -1043,7 +1043,7 @@ Setting this bit disables Predictive Store Forwarding(PSF).
 
 The format of the *PRED_CMD* register is shown in [[chap-03-System Resources#^044b1c|Figure 3-13]] below.
 
-![[pred_cmd_register.png]] ^044b1c
+![[image/amd64/vol2/chap-03/pred_cmd_register.png]]
 
 - & **Indirect Branch Prediction Barrier(IBPB)**. \[*bit 0*\]. write only.
 
