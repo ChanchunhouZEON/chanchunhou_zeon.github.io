@@ -9,6 +9,7 @@ tags:
   - instruction set
   - system programming
 category: system-programming
+order: 2
 ---
 >[!abstract] 
 > The *legacy x86* arch supports a segmentation-translation mechanism that allows *system software* to relocate and isolate instructions and data anywhere in the *virtual-memory space*.

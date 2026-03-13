@@ -11,3 +11,4 @@ admin/
 .claude/
 .idea/
 *.bak
+*.log
